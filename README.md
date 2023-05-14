@@ -1,8 +1,8 @@
-# PruebaNewShore 
+# testNewShore
 
-Para el correcto funcionamiento debemos tener en cuenta que debemos poseer una versiòn de node.js, npm compatible con la version de
-nuestro proyecto que tiene la v15 de angular.
+For the correct operation we must take into account that we must have a version of node.js, npm compatible with the version of
+our project that has v15 of angular.
 
-Despues de garantizar esto, ejecutar el comando npm start, en la terminar tener en cuenta la ubicacion del proyecto.
+After ensuring this, run the npm start command, at the finish note the location of the project.
 
-Luego abrir el naveador ingresa a la siguiente direcion:localhost:4200
+Then open the browser enter the following address: localhost: 4200
