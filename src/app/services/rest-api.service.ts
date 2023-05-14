@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Journey } from '../models/Journey';
 import { Flight } from '../models/Flight';
 import { Transport } from '../models/Transport';
@@ -28,13 +28,10 @@ export class RestApiService {
 
     return this.http.get<Journey[]>(this.apiURL).pipe(map((response: any) => {
 
-
       this.journes = response.filter((journey: any) => {
         return journey.departureStation === origin && journey.arrivalStation === destination;
       });
-      const indexToDelete = response.findIndex((item:any) => item.departureStation === origin && item.arrivalStation === destination);
-      console.log('indexToDelete',indexToDelete);
-      
+      const indexToDelete = response.findIndex((item: any) => item.departureStation === origin && item.arrivalStation === destination);
       if (indexToDelete !== -1) {
         response.splice(indexToDelete, 1);
       }
@@ -50,11 +47,10 @@ export class RestApiService {
 
       return this.journes.map((item: any) => {
         const journey = new Journey(item.departureStation, item.arrivalStation, item.price, this.flights);
-        return journey ;
+        return journey;
       });
     })
     );
-
   }
 
   // Error handling

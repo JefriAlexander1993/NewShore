@@ -3,66 +3,43 @@
     <label>Enter origin city: </label>
     <input [formControl]="origin" #input maxlength="3" placeholder="BOG" (ngModelChange)="convertUppercaseOrigin()"
       type="text" class="input-style">
-    <p *ngIf="origin.value?.length === 0">Por favor ingrese su origin</p>
-    <p *ngIf="origin.value?.length === 4">Maximo 3 caracteres</p>
+    <p class="p-warning" *ngIf="origin.value?.length === 0">Please enter your origin</p>
+    <p class="p-warning" *ngIf="origin.value?.length === 4">Maximum 3 characters</p>
     <br> <br>
     <label>Enter destination city: </label>
     <input [formControl]="destination" matInput #input maxlength="3" placeholder="MDE" type="text"
       (ngModelChange)="convertUppercaseDestination()" class="input-style">
-    <p *ngIf="destination.value?.length === 0">Por favor ingrese su destination</p>
-    <p *ngIf="destination.value?.length === 4">Maximo 3 caracteres</p>
+    <p class="p-warning" *ngIf="destination.value?.length === 0">Please enter your destination</p>
+    <p class="p-warning"*ngIf="destination.value?.length === 4">Maximum 3 characters</p>
   </div>
   <div class="card-actions">
     <button mat-raised-button color="warn" (click)="$event.preventDefault();searchJourney()">Search</button>
+    <button mat-button color="primary" (click)="$event.preventDefault();searchJourneyClear()" *ngIf="Journey.length > 0">Clear</button>
   </div>
 </div>
-
-
-<h2>Result</h2>
-<div class="card">
+<div class="card" *ngIf="Journey.length > 0">
   <div class="card-content">
-    <div *ngIf="Journey.length > 0">
-      <div *ngFor="let item of Journey">
-        <div class="card-header">
-          <h2> {{item.origin}} - {{item.destination}}</h2>
-        </div>
-        <p><b>Price: </b>${{item.price}}</p>
-        <div class="card">
-          <div class="card-content" *ngFor="let flight of item.flights">
-            <div class="card-actions">
-              <div>
-                <div class="card-header"> <h2> {{flight.origin}} - {{flight.destination}}</h2></div>
-                <h3><b>FlightCarrier: </b>{{flight.transport.flightCarrier}}</h3>
-                <h3><b>FlightNumber: </b>{{flight.transport.flightNumber}}</h3>
-                <div class="flight-card-price">
-                  <p><b>Price: </b>${{flight.price}}</p>
-                </div>
+    <h2>Result</h2>
+    <div *ngFor="let item of Journey">
+      <div class="card-header">
+        <h2> {{item.origin}} - {{item.destination}}</h2>
+      </div>
+      <p><b>Price: </b>${{item.price}}</p>
+      <div class="card">
+        <div class="card-content" *ngFor="let flight of item.flights">
+          <div class="card-actions">
+            <div>
+              <div class="card-header">
+                <h2> {{flight.origin}} - {{flight.destination}}</h2>
+              </div>
+              <h3><b>FlightCarrier: </b>{{flight.transport.flightCarrier}}</h3>
+              <h3><b>FlightNumber: </b>{{flight.transport.flightNumber}}</h3>
+              <div class="flight-card-price">
+                <p><b>Price: </b>${{flight.price}}</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<div class="card-container">
-  <div *ngFor="let item of Journey">
-    <div class="flight-card">
-      <div class="flight-card-header">
-
-      </div>
-      <div class="flight-card-body">
-        <div class="flight-card-price">
-
-        </div>
-      </div>
-    </div>
-    <div class="flight-card">
-      <div class="flight-card-info">
-
       </div>
     </div>
   </div>

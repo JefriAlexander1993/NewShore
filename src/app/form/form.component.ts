@@ -9,8 +9,8 @@ import { RestApiService } from '../services/rest-api.service';
 })
 export class FormComponent {
   Journey: any = [];
-  origin = new FormControl('BOG');
-  destination = new FormControl('MEX');
+  origin = new FormControl('MZL');
+  destination = new FormControl('MDE');
   constructor(public restApi: RestApiService) { }
 
   convertUppercaseOrigin() {
@@ -21,30 +21,31 @@ export class FormComponent {
     this.destination.setValue(this.destination.value?.toUpperCase() === undefined ? null : this.destination.value?.toUpperCase());
   }
 
-
+  searchJourneyClear(){
+    this.Journey =  [];
+    this.origin.setValue('')  
+    this.destination.setValue('')  
+  }
   searchJourney() {
 
     if (this.origin.value !== "" || this.destination.value !== "") {
 
       if ((this.origin.value === this.destination.value)) {
-        alert('El origin y el distino no pueden ser iguales');
+        alert('Source and destination cannot be the same');
         return;
       }
       this.restApi.searchJourney(this.origin.value, this.destination.value).subscribe((data: any) => {
-   
-        console.log('Journey',data);
-        
         this.Journey = data;
         if (this.Journey.length > 0) {
-          alert('La busqueda ha traido resultado');
+          alert('The search has been successful');
           return
         } else {
-          alert('No han entrado vuelos que concidan con la información agregada');
+          alert('They have not found flights that match the information added');
           return
         }
       });
     } else {
-      alert('Se require que se dirigencie al menos el campo de origin');
+      alert('Both fields are required');
       return
     }
   }
