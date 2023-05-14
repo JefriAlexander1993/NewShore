@@ -1,20 +1,26 @@
 <div class="card">
   <div class="card-content">
-    <label>Enter origin city: </label>
+    <label>Enter origin city(*): </label>
     <input [formControl]="origin" #input maxlength="3" placeholder="BOG" (ngModelChange)="convertUppercaseOrigin()"
       type="text" class="input-style">
     <p class="p-warning" *ngIf="origin.value?.length === 0">Please enter your origin</p>
     <p class="p-warning" *ngIf="origin.value?.length === 4">Maximum 3 characters</p>
     <br> <br>
-    <label>Enter destination city: </label>
+    <label>Enter destination city(*): </label>
     <input [formControl]="destination" matInput #input maxlength="3" placeholder="MDE" type="text"
       (ngModelChange)="convertUppercaseDestination()" class="input-style">
     <p class="p-warning" *ngIf="destination.value?.length === 0">Please enter your destination</p>
-    <p class="p-warning"*ngIf="destination.value?.length === 4">Maximum 3 characters</p>
+    <p class="p-warning" *ngIf="destination.value?.length === 4">Maximum 3 characters</p>
+    <br> <br>
+    <label>Select in curreny: </label>
+    <select [formControl]="currency">
+      <option *ngFor="let currency of coins" [value]="currency.value">{{currency.label}}</option>
+    </select>
   </div>
   <div class="card-actions">
     <button mat-raised-button color="warn" (click)="$event.preventDefault();searchJourney()">Search</button>
-    <button mat-button color="primary" (click)="$event.preventDefault();searchJourneyClear()" *ngIf="Journey.length > 0">Clear</button>
+    <button mat-button color="primary" (click)="$event.preventDefault();searchJourneyClear()"
+      *ngIf="Journey.length > 0">Clear</button>
   </div>
 </div>
 <div class="card" *ngIf="Journey.length > 0">
@@ -24,7 +30,7 @@
       <div class="card-header">
         <h2> {{item.origin}} - {{item.destination}}</h2>
       </div>
-      <p><b>Price: </b>${{item.price}}</p>
+      <p><b>Price: </b>{{item.price}}</p>
       <div class="card">
         <div class="card-content" *ngFor="let flight of item.flights">
           <div class="card-actions">
@@ -35,7 +41,7 @@
               <h3><b>FlightCarrier: </b>{{flight.transport.flightCarrier}}</h3>
               <h3><b>FlightNumber: </b>{{flight.transport.flightNumber}}</h3>
               <div class="flight-card-price">
-                <p><b>Price: </b>${{flight.price}}</p>
+                <p><b>Price: </b>{{flight.price}}</p>
               </div>
             </div>
           </div>

@@ -23,9 +23,9 @@ export class RestApiService {
     }),
   };
 
-
-  searchJourney(origin: any, destination: any): Observable<Journey[]> {
-
+  searchJourney(origin: any, destination: any, currency: any): Observable<Journey[]> {
+    console.log('currency',currency);
+    
     return this.http.get<Journey[]>(this.apiURL).pipe(map((response: any) => {
 
       this.journes = response.filter((journey: any) => {
@@ -41,12 +41,12 @@ export class RestApiService {
 
       this.flights = this.journesConsider.map((item: any) => {
         const transport = new Transport(item.flightCarrier, item.flightNumber);
-        const flight = new Flight(item.departureStation, item.arrivalStation, item.price, transport);
+        const flight = new Flight(item.departureStation, item.arrivalStation,Math.round(item.price * currency), transport);
         return flight;
       });
 
       return this.journes.map((item: any) => {
-        const journey = new Journey(item.departureStation, item.arrivalStation, item.price, this.flights);
+        const journey = new Journey(item.departureStation, item.arrivalStation, Math.round(item.price * currency), this.flights);
         return journey;
       });
     })

@@ -1,16 +1,8 @@
 # PruebaNewShore 
 
-se debe ejecutar desde  visual studio la carpeta:
-FlightJourney
+Para el correcto funcionamiento debemos tener en cuenta que debemos poseer una versiòn de node.js, npm compatible con la version de
+nuestro proyecto que tiene la v15 de angular.
 
-la API queda desplegada en la siguiente direccion
-https://localhost:8080
+Despues de garantizar esto, ejecutar el comando npm start, en la terminar tener en cuenta la ubicacion del proyecto.
 
-ahora se abra en la consola la carpeta:
-JourneyForm
-
-y se ejecuta el siguiente comando
-yarn start
-
-en el naveador ingresa a la siguiente direcion para acceder a la interfaz:
-localhost:4200
+Luego abrir el naveador ingresa a la siguiente direcion:localhost:4200
